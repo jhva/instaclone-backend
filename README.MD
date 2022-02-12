@@ -17,13 +17,13 @@ graphql-tools 7.2
 
 ## user
 
-- [] Create Account
-- [] See profile
-  -[] Login
-  -[] edit profile
+- [x] Create Account
+- [x] See profile
+  -[x] Login
+  -[x] edit profile
   -[] follow users
   -[]Unfollow user
-  -[]change avatar
+  -[x]change avatar
 
 ## avatar
 

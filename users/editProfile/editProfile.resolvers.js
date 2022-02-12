@@ -20,16 +20,22 @@ export default {
           bio,
           avatar,
         },
-        { loggedInUser, protectResolver }
+        { loggedInUser }
       ) => {
+        let avatarUrl = null;
         //파일 읽을 코드
-        const { filename, createReadStream } = await avatar;
-        const readStream = createReadStream();
-        const writeStream = createWriteStream(
-          process.cwd() + '/uploads/' + filename
-        );
-        readStream.pipe(writeStream);
+        if (avatar) {
+          const { filename, createReadStream } = await avatar;
+          const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
+          const readStream = createReadStream();
+          const writeStream = createWriteStream(
+            process.cwd() + '/uploads/' + newFilename
+          );
+          readStream.pipe(writeStream);
+          avatarUrl = `http://localhost:4000/static/${newFilename}`;
+        }
         //유저가 준 토큰 ???
+        console.log(avatar);
 
         let uglyPassword = null;
         if (newPassword) {
@@ -46,6 +52,7 @@ export default {
             email,
             bio,
             ...(uglyPassword && { password: uglyPassword }),
+            ...(avatarUrl && { avatar: avatarUrl }),
           },
         });
         if (updatedUser.id) {
