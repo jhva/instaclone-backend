@@ -10,7 +10,6 @@ const apollo = new ApolloServer({
   typeDefs,
   resolvers,
   context: async ({ req }) => {
-    console.log(req.headers);
     return {
       loggedInUser: await getUser(req.headers.token),
       protectResolver,
