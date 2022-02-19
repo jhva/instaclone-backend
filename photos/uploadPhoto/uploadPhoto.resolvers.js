@@ -1,5 +1,6 @@
 import { protectedResolver } from '../../users/users.utils';
 import client from '../../client';
+import { processHashtags } from '../photos.utils';
 
 export default {
   Mutation: {
@@ -8,11 +9,7 @@ export default {
         let hashtagObj = null;
         if (caption) {
           const hashtags = caption.match(/#[\w]+/g);
-          hashtagObj = hashtags.map((hashtag) => ({
-            where: { hashtag },
-            create: { hashtag },
-          }));
-          console.log(hashtagObj);
+          hashtagObj = processHashtags(caption);
           /// 해시태그가있으면
           //생성 get or create
         }

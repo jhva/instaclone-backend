@@ -9,6 +9,9 @@ Prisma는 ORM (js,Ts)
 "npm i @prisma/cli -D"
 "npx prisma init" <==
 
+compound unique  여러필드들의 복합체이면서 이기능을 사용하면 복합 unique를 설정할수있게해주는기능
+" @@unique([])"
+
 # 2/4일 3.6 ==>3.7
 
 graphql-tools 7.2
