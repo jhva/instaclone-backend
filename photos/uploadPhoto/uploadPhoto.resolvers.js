@@ -1,6 +1,7 @@
 import { protectedResolver } from '../../users/users.utils';
 import client from '../../client';
 import { processHashtags } from '../photos.utils';
+import { uploadToS3 } from '../../shared/shared.utils';
 
 export default {
   Mutation: {
@@ -13,9 +14,10 @@ export default {
           /// 해시태그가있으면
           //생성 get or create
         }
+        const fileUrl = await uploadToS3(file, loggedInUser.id, 'uploads');
         return client.photo.create({
           data: {
-            file,
+            file: fileUrl,
             caption,
             user: {
               connect: {
